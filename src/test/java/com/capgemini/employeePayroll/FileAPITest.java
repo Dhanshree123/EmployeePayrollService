@@ -1,4 +1,4 @@
-package EmployeePayroll;
+package com.capgemini.employeePayroll;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -6,6 +6,9 @@ import java.util.stream.IntStream;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.capgemini.employeePayroll.FileUtils;
+import com.capgemini.employeePayroll.WatchServiceExample;
 
 public class FileAPITest {
 	private static String HOME = System.getProperty("user.home");
@@ -46,5 +49,12 @@ public class FileAPITest {
 		Files.newDirectoryStream(pathLoc, path -> path.toFile().isFile() && path.toString().startsWith("temp"))
 				.forEach(System.out::println);
 
+	}
+
+	@Test
+	public void givenADirectoryWhenWatchedListAllTheActivities() throws IOException {
+		Path pathLoc = Paths.get(HOME + "/" + DIRECTORY);
+		Files.list(pathLoc).filter(Files::isRegularFile).forEach(System.out::println);
+		new WatchServiceExample(pathLoc).processEvents();
 	}
 }
