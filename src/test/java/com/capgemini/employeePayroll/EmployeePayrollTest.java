@@ -1,7 +1,5 @@
 package com.capgemini.employeePayroll;
 
-import static org.junit.Assert.*;
-
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -21,4 +19,13 @@ public class EmployeePayrollTest {
 		System.out.println("Number of entries:- " + entries);
 		Assert.assertEquals(3, entries);
 	}
+
+	@Test
+	public void givenFileReadingFromFileShouldMatchEmployeeCount() {
+		EmployeePayroll employeePayroll = new EmployeePayroll();
+		long entries = employeePayroll.readEmployeePayrollData(EmployeePayroll.IOService.FILE_IO);
+		System.out.println("Number of entries:- " + entries);
+		Assert.assertEquals(3, entries);
+	}
+
 }

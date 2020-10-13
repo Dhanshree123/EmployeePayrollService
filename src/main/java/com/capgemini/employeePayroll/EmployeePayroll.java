@@ -12,6 +12,10 @@ public class EmployeePayroll {
 
 	private List<EmployeePayrollData> employeePayrollList;
 
+	public EmployeePayroll() {
+
+	}
+
 	public EmployeePayroll(List<EmployeePayrollData> employeePayrollList) {
 		this.employeePayrollList = employeePayrollList;
 	}
@@ -33,6 +37,13 @@ public class EmployeePayroll {
 		System.out.println("Enter employee salary");
 		Double salary = sc.nextDouble();
 		employeePayrollList.add(new EmployeePayrollData(empId, name, salary));
+	}
+
+	public long readEmployeePayrollData(IOService io) {
+		if (io.equals(IOService.FILE_IO)) {
+			this.employeePayrollList = new EmployeePayrollFileIOService().readData();
+		}
+		return employeePayrollList.size();
 	}
 
 	public void writeEmployeePayrollData(IOService io) {
